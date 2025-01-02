@@ -42,11 +42,11 @@ struct TrialView: View {
             }
             .padding()
             
-            // Test button for adding a product
-//            Button("Add Test Product") {
-//                addTestProduct()
-//            }
-//            .padding()
+//             Test button for adding a product
+            Button("Add Test Product") {
+                addTestProduct()
+            }
+            .padding()
         }
     }
     
@@ -63,41 +63,47 @@ struct TrialView: View {
                 switch result {
                 case .success(let fetchedProducts):
                     self.products = fetchedProducts
-                    print("✅ Successfully fetched \(fetchedProducts.count) products")
+                    print("Successfully fetched \(fetchedProducts.count) products")
                     
                 case .failure(let error):
                     self.errorMessage = error.localizedDescription
-                    print("❌ Error fetching products: \(error)")
+                    print("Error fetching products: \(error)")
                 }
             }
         }
     }
     
     // Function to add a test product
-//    private func addTestProduct() {
-//        let testProduct = Product(
-//            productName: "Test Product",
-//            productType: "Test Category",
-//            price: 99.99,
-//            tax: 10.0,
-//            image: nil
-//        )
-//        
-//        APIService.shared.addProduct(product: testProduct) { result in
-//            DispatchQueue.main.async {
-//                switch result {
-//                case .success(let message):
-//                    print("✅ Product added successfully: \(message)")
-//                    // Refresh the product list
-//                    fetchProducts()
-//                    
-//                case .failure(let error):
-//                    self.errorMessage = error.localizedDescription
-//                    print("❌ Error adding product: \(error)")
-//                }
-//            }
-//        }
-//    }
+    private func addTestProduct() {
+        let testProduct = Product(
+            productName: "TestProduct",
+            productType: "Test Category",
+            price: 99.99,
+            tax: 10.00,
+            image: nil
+        )
+        
+        print("Name: '\(testProduct.productName)'")
+        print("Type: '\(testProduct.productType)'")
+        print("Price: \(testProduct.price)")
+        print("Tax: \(testProduct.tax)")
+        
+        APIservice.shared.addProduct(product: testProduct) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let message):
+                    print("Prodyct Added!: \(message)")
+                    self.errorMessage = nil
+                    fetchProducts()
+                    
+                case .failure(let error):
+                    let errorMessage = (error as NSError).userInfo["message"] as? String ?? error.localizedDescription
+                    self.errorMessage = "Failed to add product"
+                    print("Add product Error: \(errorMessage)")
+                }
+            }
+        }
+    }
 }
 
 #Preview {
