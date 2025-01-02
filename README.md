@@ -22,7 +22,7 @@ App uses Swift UI and MVVM architecture.
 
 ### How to Build and Run:
 1. Clone the repo
-`git clone https://github.com/your-username/discover-app.git`
+`https://github.com/ChiduAnush/swipe-ios-assignment.git`
 
 2.Open the project in Xcode:
 Navigate to the project folder and open Discover.xcodeproj.
