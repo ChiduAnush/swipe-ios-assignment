@@ -104,7 +104,7 @@ struct ProductListView: View {
             .navigationTitle("")
             .background(
                 NavigationLink(
-                    destination: AddProductView(),
+                    destination: AddProductView(parentViewModel: self.viewModel),
                     isActive: $navigateToAddProduct,
                     label: { EmptyView() }
                 )

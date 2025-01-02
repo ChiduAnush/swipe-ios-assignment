@@ -13,6 +13,8 @@ struct AddProductView: View {
     @StateObject private var viewModel = AddProductViewModel()
     @State private var showImagePicker: Bool = false
     
+    var parentViewModel: ProductListViewModel?
+    
     var body: some View {
         NavigationView {
             ScrollView {
@@ -105,6 +107,10 @@ struct AddProductView: View {
                     Button(action: {
                         viewModel.validateAndSubmit { success in
                             if success {
+                                // Refresh the product list in the parent view
+                                if let parentViewModel = parentViewModel {
+                                    parentViewModel.fetchProducts()
+                                }
                                 presentationMode.wrappedValue.dismiss()
                             }
                         }
@@ -114,7 +120,7 @@ struct AddProductView: View {
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
                             .padding()
-                            .background(Color(uiColor: .systemBlue))
+                            .background(Color.blue)
                             .cornerRadius(10)
                     }
                     .padding(.horizontal)
@@ -130,7 +136,13 @@ struct AddProductView: View {
                 Alert(
                     title: Text("Message"),
                     message: Text(viewModel.alertMessage),
-                    dismissButton: .default(Text("OK"))
+                    dismissButton: .default(Text("OK")) {
+                        if viewModel.alertMessage == "Product added Successfully!" {
+                            
+                            parentViewModel?.fetchProducts()
+                            presentationMode.wrappedValue.dismiss()
+                        }
+                    }
                 )
             }
         }
