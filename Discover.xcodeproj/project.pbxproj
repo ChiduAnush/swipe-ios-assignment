@@ -30,6 +30,9 @@
 		13DB1BC22D26EADD00E09E48 /* PrintSystemFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DB1BC12D26EADD00E09E48 /* PrintSystemFonts.swift */; };
 		13DB1BC32D26EADD00E09E48 /* PrintSystemFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DB1BC12D26EADD00E09E48 /* PrintSystemFonts.swift */; };
 		13DB1BC42D26EADD00E09E48 /* PrintSystemFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DB1BC12D26EADD00E09E48 /* PrintSystemFonts.swift */; };
+		13DB1BC62D27283E00E09E48 /* ProductListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DB1BC52D27283E00E09E48 /* ProductListViewModel.swift */; };
+		13DB1BC72D27283E00E09E48 /* ProductListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DB1BC52D27283E00E09E48 /* ProductListViewModel.swift */; };
+		13DB1BC82D27283E00E09E48 /* ProductListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DB1BC52D27283E00E09E48 /* ProductListViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +74,7 @@
 		13DB1BBC2D26E54100E09E48 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		13DB1BBD2D26E5FC00E09E48 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		13DB1BC12D26EADD00E09E48 /* PrintSystemFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintSystemFonts.swift; sourceTree = "<group>"; };
+		13DB1BC52D27283E00E09E48 /* ProductListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +189,7 @@
 		13DB1BA02D26849A00E09E48 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				13DB1BC52D27283E00E09E48 /* ProductListViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -340,6 +345,7 @@
 			files = (
 				13DB1B772D266FFC00E09E48 /* ContentView.swift in Sources */,
 				13DB1BAE2D26C0E000E09E48 /* ProductListView.swift in Sources */,
+				13DB1BC62D27283E00E09E48 /* ProductListViewModel.swift in Sources */,
 				13DB1BB22D26C5C100E09E48 /* AddProductView.swift in Sources */,
 				13DB1BB62D26E29000E09E48 /* TproductCard.swift in Sources */,
 				13DB1B752D266FFC00E09E48 /* DiscoverApp.swift in Sources */,
@@ -358,6 +364,7 @@
 			files = (
 				13DB1BBF2D26E5FC00E09E48 /* Fonts.swift in Sources */,
 				13DB1B862D266FFE00E09E48 /* DiscoverTests.swift in Sources */,
+				13DB1BC72D27283E00E09E48 /* ProductListViewModel.swift in Sources */,
 				13DB1BC32D26EADD00E09E48 /* PrintSystemFonts.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -367,6 +374,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13DB1B922D266FFE00E09E48 /* DiscoverUITestsLaunchTests.swift in Sources */,
+				13DB1BC82D27283E00E09E48 /* ProductListViewModel.swift in Sources */,
 				13DB1BC42D26EADD00E09E48 /* PrintSystemFonts.swift in Sources */,
 				13DB1BC02D26E5FC00E09E48 /* Fonts.swift in Sources */,
 				13DB1B902D266FFE00E09E48 /* DiscoverUITests.swift in Sources */,

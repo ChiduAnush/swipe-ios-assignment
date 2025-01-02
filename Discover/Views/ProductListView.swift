@@ -13,30 +13,18 @@
 
 import SwiftUI
 
-import SwiftUI
-
 struct ProductListView: View {
-    @State private var products: [Product] = []
-    @State private var favorites: Set<String> = loadFavorites()
-    @State private var searchQuery: String = ""
-    @State private var isLoading = false
-    @State private var errorMessage: String?
+    
+    @StateObject private var viewModel = ProductListViewModel()
     @State private var showSearchBar = false
     @State private var navigateToAddProduct = false
     
-    var filteredProducts: [Product] {
-        let filtered = searchQuery.isEmpty ? products : products.filter {
-            $0.productName.localizedCaseInsensitiveContains(searchQuery)
-        }
-        
-        // Sort favorites to the top
-        return filtered.sorted { favorites.contains($0.productName) && !favorites.contains($1.productName) }
-    }
     
     var body: some View {
         NavigationView {
             ZStack {
                 VStack {
+                    // Header
                     HStack {
                         Text("Discover")
                             .font(.system(size: 32))
@@ -45,6 +33,7 @@ struct ProductListView: View {
                     }
                     .padding(.horizontal)
                     
+                    // Tip Card
                     VStack(alignment: .leading, spacing: 10) {
                         Image(systemName: "lightbulb.circle")
                             .resizable()
@@ -59,16 +48,17 @@ struct ProductListView: View {
                     .cornerRadius(8)
                     .padding(.horizontal, 15)
                     
+                    // Search Bar
                     if showSearchBar {
                         HStack {
-                            TextField("Search Products", text: $searchQuery)
+                            TextField("Search Products", text: $viewModel.searchQuery)
                                 .padding(12)
                                 .background(Color(.secondarySystemBackground))
                                 .cornerRadius(8)
                                 .padding(.leading)
                             
                             Button(action: {
-                                searchQuery = ""
+                                viewModel.searchQuery = ""
                                 showSearchBar = false
                             }) {
                                 Image(systemName: "xmark.circle.fill")
@@ -81,27 +71,29 @@ struct ProductListView: View {
                         .animation(.spring(), value: showSearchBar)
                     }
                     
+                    // Product List
                     ScrollView {
                         LazyVStack(spacing: 20) {
-                            ForEach(filteredProducts) { product in
-                                ProductCard(product: product, isFavorite: favorites.contains(product.productName)) {
-                                    toggleFavorite(product) // Handle favorite/unfavorite
+                            ForEach(viewModel.filteredProducts) { product in
+                                ProductCard(product: product, isFavorite: viewModel.favorites.contains(product.productName)) {
+                                    viewModel.toggleFavorite(product)
                                 }
                             }
                         }
                         .padding()
                     }
                     
-                    if products.isEmpty && !isLoading {
+                    // Empty State
+                    if viewModel.products.isEmpty && !viewModel.isLoading {
                         Text("No products found.")
                             .foregroundColor(.gray)
                             .padding()
                     }
                 }
                 
+                // Floating Tab Bar
                 VStack {
                     Spacer()
-                    
                     FloatingTabBar(showSearchBar: $showSearchBar, onAddTapped: {
                         navigateToAddProduct = true
                     })
@@ -110,10 +102,6 @@ struct ProductListView: View {
                 }
             }
             .navigationTitle("")
-            .onAppear(perform: {
-                fetchProducts()
-                favorites = ProductListView.loadFavorites() // Load favorites from UserDefaults
-            })
             .background(
                 NavigationLink(
                     destination: AddProductView(),
@@ -122,41 +110,6 @@ struct ProductListView: View {
                 )
             )
         }
-    }
-    
-    private func fetchProducts() {
-        isLoading = true
-        errorMessage = nil
-        
-        APIservice.shared.fetchProducts { result in
-            DispatchQueue.main.async {
-                isLoading = false
-                switch result {
-                case .success(let fetchedProducts):
-                    self.products = fetchedProducts
-                case .failure(let error):
-                    self.errorMessage = error.localizedDescription
-                }
-            }
-        }
-    }
-    
-    private func toggleFavorite(_ product: Product) {
-        if favorites.contains(product.productName) {
-            favorites.remove(product.productName)
-        } else {
-            favorites.insert(product.productName)
-        }
-        saveFavorites(favorites) // Save favorites to UserDefaults
-    }
-    
-    private static func loadFavorites() -> Set<String> {
-        let savedFavorites = UserDefaults.standard.stringArray(forKey: "favoriteProducts") ?? []
-        return Set(savedFavorites)
-    }
-    
-    private func saveFavorites(_ favorites: Set<String>) {
-        UserDefaults.standard.set(Array(favorites), forKey: "favoriteProducts")
     }
 }
 
@@ -257,11 +210,12 @@ struct ProductCard: View {
                 Button(action: onFavoriteTapped) {
                     Image(systemName: isFavorite ? "heart.fill" : "heart")
                         .foregroundColor(isFavorite ? .red : .gray)
-                        .font(.system(size: 20))
+                        .font(.system(size: 17))
                         .padding(8)
-                        .background(Color.white.opacity(0.9))
+                        .padding(.top, 1)
+                        .background(Color.white.opacity(0.8))
                         .clipShape(Circle())
-                        .shadow(radius: 2)
+                        .shadow(color: .black.opacity(0.15), radius: 10)
                 }
                 .padding([.bottom, .trailing], 10)
             }
@@ -300,9 +254,9 @@ struct BProductCard: View {
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 80, height: 80)
                     .cornerRadius(8)
-                    .background(Color(.systemGray5)) // Grey background placeholder
+                    .background(Color(.systemGray5))
             } placeholder: {
-                Color(.systemGray5) // Grey background placeholder
+                Color(.systemGray5)
                     .frame(width: 80, height: 80)
                     .cornerRadius(8)
                     .overlay(
@@ -324,38 +278,9 @@ struct BProductCard: View {
         .shadow(radius: 2)
     }
 }
-//
-//struct FloatingTabBarD: View {
-//    @Binding var showSearchBar: Bool
-//    let onAddTapped: () -> Void
-//    
-//    var body: some View {
-//        HStack {
-//            Button(action: {
-//                showSearchBar.toggle()
-//            }) {
-//                Image(systemName: "magnifyingglass")
-//                    .font(.title2)
-//                    .padding()
-//                    .background(Color.blue)
-//                    .foregroundColor(.white)
-//                    .clipShape(Circle())
-//            }
-//            
-//            Spacer()
-//            
-//            Button(action: onAddTapped) {
-//                Image(systemName: "plus")
-//                    .font(.title2)
-//                    .padding()
-//                    .background(Color.blue)
-//                    .foregroundColor(.white)
-//                    .clipShape(Circle())
-//            }
-//        }
-//        .padding(.horizontal, 40)
-//    }
-//}
+
+
+
 
 #Preview {
     ProductListView()
