@@ -8,19 +8,19 @@ App has 2 screens:
 App uses Swift UI and MVVM architecture.
 
 
-####Features:
+#### Features:
 - List of products fetched from API
 - Search Products by name
 - Mark products as favorites. (Saved Locally)
 - Add new Product (with validation for all fields)
 
-####API end points:
+#### API end points:
 
 For fetching products, GET https://app.getswipe.in/api/public/get
 For adding product, POST https://app.getswipe.in/api/public/add
 
 
-###How to Build and Run:
+### How to Build and Run:
 1. Clone the repo
 `git clone https://github.com/your-username/discover-app.git`
 
@@ -51,4 +51,4 @@ Discover/
 
 
 ###Demo Video:
-
+[Drive Link]([http://example.com](https://drive.google.com/file/d/1ryXVhRY147PmZNMkMP0a7ZoCiGB2c7KH/view?usp=sharing))
