@@ -15,6 +15,7 @@ struct DiscoverApp: App {
             
 //            TrialView()
             ProductListView()
+//            TproductCard()
             
         }
     }
