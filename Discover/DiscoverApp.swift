@@ -12,7 +12,10 @@ struct DiscoverApp: App {
     var body: some Scene {
         WindowGroup {
 //            ContentView()
-            TrialView()
+            
+//            TrialView()
+            ProductListView()
+            
         }
     }
 }
