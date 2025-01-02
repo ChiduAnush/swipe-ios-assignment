@@ -40,6 +40,7 @@ struct ProductListView: View {
                     HStack{
                         Text("Discover")
                             .font(.system(size: 32))
+//                            .fontWeight(.semibold)
                             .padding(.top, 30)
                         Spacer()
                     }
@@ -76,7 +77,7 @@ struct ProductListView: View {
                                     .padding(.trailing)
                             }
                         }
-                        .padding(.top, 10)
+                        .padding(.top, 5)
                         .transition(.move(edge: .top))
                         .animation(.spring(), value: showSearchBar)
                     }
@@ -105,7 +106,7 @@ struct ProductListView: View {
                     FloatingTabBar(showSearchBar: $showSearchBar, onAddTapped: {
                         navigateToAddProduct = true
                     })
-                    .padding(.bottom, 60)
+                    .padding(.bottom, 40)
                     .frame(maxWidth: .infinity, alignment: .center)
                 }
             }
