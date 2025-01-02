@@ -175,7 +175,7 @@ struct ProductCard: View {
                             .tracking(-0.5)
                             .fontWeight(.regular)
                             .foregroundColor(.primary)
-                        Text("$")
+                        Text("₹")
                             .font(.system(size: 18))
                             .padding(.bottom, 5)
                     }
@@ -188,7 +188,7 @@ struct ProductCard: View {
                             .font(.system(size: 19))
                             .foregroundColor(.primary)
                         
-                        HStack(spacing: 15) {
+                        HStack(spacing: 20) {
                             
                             HStack(spacing: 5){
                                 Image(systemName: "number")
@@ -202,13 +202,13 @@ struct ProductCard: View {
                                     .foregroundColor(.secondary)
                             }
                             
-                            HStack(spacing: 2){
+                            HStack(spacing: 0){
                                 Image(systemName: "doc.text.image")
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 15, height: 15)
                                     .foregroundColor(.secondary).opacity(0.7)
-                                Text(" \(product.tax, specifier: "%.2f")")
+                                Text(" Tax: \(product.tax, specifier: "%.2f")")
                                     .font(.system(size: 12))
                                     .foregroundColor(.secondary)
                             }
