@@ -79,6 +79,7 @@
 		13DB1BC12D26EADD00E09E48 /* PrintSystemFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintSystemFonts.swift; sourceTree = "<group>"; };
 		13DB1BC52D27283E00E09E48 /* ProductListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListViewModel.swift; sourceTree = "<group>"; };
 		13DB1BC92D272CB800E09E48 /* AddProductViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductViewModel.swift; sourceTree = "<group>"; };
+		13DB1BCD2D2737C000E09E48 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +110,7 @@
 		13DB1B682D266FFC00E09E48 = {
 			isa = PBXGroup;
 			children = (
+				13DB1BCD2D2737C000E09E48 /* README.md */,
 				13DB1B732D266FFC00E09E48 /* Discover */,
 				13DB1B842D266FFE00E09E48 /* DiscoverTests */,
 				13DB1B8E2D266FFE00E09E48 /* DiscoverUITests */,
