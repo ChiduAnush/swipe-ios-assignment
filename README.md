@@ -16,8 +16,8 @@ App uses Swift UI and MVVM architecture.
 
 #### API end points:
 
-For fetching products, GET https://app.getswipe.in/api/public/get
-For adding product, POST https://app.getswipe.in/api/public/add
+- For fetching products, GET https://app.getswipe.in/api/public/get
+- For adding product, POST https://app.getswipe.in/api/public/add
 
 
 ### How to Build and Run:
@@ -35,5 +35,5 @@ Click the Run button (or `Cmd + R`).
 `TrialView.swift` and `TproductCard.swift`, are for trial purposes, please ignore them.
 
 
-###Demo Video:
-[Drive Link]([http://example.com](https://drive.google.com/file/d/1ryXVhRY147PmZNMkMP0a7ZoCiGB2c7KH/view?usp=sharing))
+### Demo Video:
+[Drive Link](https://drive.google.com/file/d/1ryXVhRY147PmZNMkMP0a7ZoCiGB2c7KH/view?usp=sharing)
