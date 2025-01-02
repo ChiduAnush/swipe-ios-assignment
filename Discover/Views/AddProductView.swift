@@ -6,86 +6,68 @@
 //
 
 
-
 import SwiftUI
 
 struct AddProductView: View {
     @Environment(\.presentationMode) var presentationMode
-    @State private var productName: String = ""
-    @State private var productType: String = "Electronics"
-    @State private var price: String = ""
-    @State private var tax: String = ""
-    @State private var selectedImage: UIImage? = nil
-    
+    @StateObject private var viewModel = AddProductViewModel()
     @State private var showImagePicker: Bool = false
-    @State private var showAlert: Bool = false
-    @State private var alertMessage: String = ""
-    
-    let productTypes = ["Electronics", "Clothing", "Product",  "Shoes", "Service", "Books", "Home Appliances", "Other"]
     
     var body: some View {
         NavigationView {
             ScrollView {
-                
-                HStack{
-                    Text("Add Product")
-                        .font(.system(size: 32))
-                        .padding(.top, 30)
-                    Spacer()
-                }
-                .padding(.horizontal)
-
-                
                 VStack(spacing: 20) {
-                    // Product Details Section
-                    VStack(alignment: .leading, spacing: 10) {
-                        Text("Product Details")
-                            .font(.system(size: 15))
-                            .bold()
-                            .foregroundStyle(.secondary)
-                        
-                        // Product Type Picker
-                        HStack {
-                            Text("Product Type")
-//                                .font(.system(size: 14))
-                                .foregroundStyle(Color(uiColor: .systemGray2))
-                            Spacer()
-                            Picker("Product Type", selection: $productType) {
-                                ForEach(productTypes, id: \.self) { type in
-                                    Text(type).tag(type)
-                                }
-                            }
-                            .pickerStyle(MenuPickerStyle())
-                            .accentColor(.primary)
-                        }
-                        .padding(.horizontal)
-                        .padding(.vertical, 11)
-                        .background(Color(.secondarySystemBackground).opacity(0.8))
-                        .cornerRadius(8)
-                        
-                        // Product Name TextField
-                        TextField("Product Name", text: $productName)
-                            .padding()
-                            .background(Color(.secondarySystemBackground).opacity(0.8))
-                            .cornerRadius(8)
-                            .autocapitalization(.words)
-                            .padding(.bottom, 15)
-                        
-                        // Price TextField
-                        TextField("Selling Price", text: $price)
-                            .padding()
-                            .background(Color(.secondarySystemBackground).opacity(0.8))
-                            .cornerRadius(8)
-                            .keyboardType(.decimalPad)
-                        
-                        // Tax TextField
-                        TextField("Tax Rate", text: $tax)
-                            .padding()
-                            .background(Color(.secondarySystemBackground).opacity(0.8))
-                            .cornerRadius(8)
-                            .keyboardType(.decimalPad)
+                    // Header
+                    HStack {
+                        Text("Add Product")
+                            .font(.system(size: 32))
+                            .padding(.top, 30)
+                        Spacer()
                     }
                     .padding(.horizontal)
+                    
+                    // Product Type Picker
+                    HStack {
+                        Text("Product Type")
+                            .foregroundStyle(Color(uiColor: .systemGray2))
+                        Spacer()
+                        Picker("Product Type", selection: $viewModel.productType) {
+                            ForEach(viewModel.productTypes, id: \.self) { type in
+                                Text(type).tag(type)
+                            }
+                        }
+                        .pickerStyle(MenuPickerStyle())
+                        .accentColor(.primary)
+                    }
+                    .padding(.horizontal)
+                    .padding(.vertical, 10)
+                    .background(Color(.secondarySystemBackground).opacity(0.8))
+                    .cornerRadius(8)
+                    .padding(.horizontal)
+                    
+                    // Product Name TextField
+                    TextField("Product Name", text: $viewModel.productName)
+                        .padding()
+                        .background(Color(.secondarySystemBackground).opacity(0.8))
+                        .cornerRadius(8)
+                        .padding(.horizontal)
+                        .padding(.bottom, 15)
+                    
+                    // Price TextField
+                    TextField("Selling Price", text: $viewModel.price)
+                        .padding()
+                        .background(Color(.secondarySystemBackground).opacity(0.8))
+                        .cornerRadius(8)
+                        .keyboardType(.decimalPad)
+                        .padding(.horizontal)
+                    
+                    // Tax TextField
+                    TextField("Tax Rate", text: $viewModel.tax)
+                        .padding()
+                        .background(Color(.secondarySystemBackground).opacity(0.8))
+                        .cornerRadius(8)
+                        .keyboardType(.decimalPad)
+                        .padding(.horizontal)
                     
                     // Product Image Section
                     VStack(alignment: .leading, spacing: 10) {
@@ -109,7 +91,7 @@ struct AddProductView: View {
                             .cornerRadius(8)
                         }
                         
-                        if let image = selectedImage {
+                        if let image = viewModel.selectedImage {
                             Image(uiImage: image)
                                 .resizable()
                                 .scaledToFit()
@@ -121,14 +103,18 @@ struct AddProductView: View {
                     
                     // Add Product Button
                     Button(action: {
-                        validateAndSubmit()
+                        viewModel.validateAndSubmit { success in
+                            if success {
+                                presentationMode.wrappedValue.dismiss()
+                            }
+                        }
                     }) {
                         Text("Add Product")
                             .font(.system(size: 18, weight: .semibold))
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
                             .padding()
-                            .background(Color.blue)
+                            .background(Color(uiColor: .systemBlue))
                             .cornerRadius(10)
                     }
                     .padding(.horizontal)
@@ -137,86 +123,21 @@ struct AddProductView: View {
                 .padding(.top, 20)
             }
             .navigationTitle("")
-//            .toolbar {
-//                ToolbarItem(placement: .navigationBarTrailing) {
-//                    Button("Cancel") {
-//                        presentationMode.wrappedValue.dismiss()
-//                    }
-//                }
-//            }
             .sheet(isPresented: $showImagePicker) {
-                ImagePicker(image: $selectedImage)
+                ImagePicker(image: $viewModel.selectedImage)
             }
-            .alert(isPresented: $showAlert) {
+            .alert(isPresented: $viewModel.showAlert) {
                 Alert(
                     title: Text("Message"),
-                    message: Text(alertMessage),
-                    dismissButton: .default(Text("OK")) {
-                        if alertMessage == "Product added Successfully!" {
-//                            resetFields()
-                            presentationMode.wrappedValue.dismiss()
-                        }
-                    }
+                    message: Text(viewModel.alertMessage),
+                    dismissButton: .default(Text("OK"))
                 )
             }
         }
     }
-    
-    private func validateAndSubmit() {
-        guard !productType.isEmpty else {
-            alertMessage = "Please select a product type."
-            showAlert = true
-            return
-        }
-        
-        guard !productName.isEmpty else {
-            alertMessage = "Please enter a product name."
-            showAlert = true
-            return
-        }
-        
-        guard let priceValue = Double(price), priceValue > 0 else {
-            alertMessage = "Please enter a valid price, No \",\" allowed"
-            showAlert = true
-            return
-        }
-        
-        guard let taxValue = Double(tax), taxValue >= 0 else {
-            alertMessage = "Please enter a valid tax rate."
-            showAlert = true
-            return
-        }
-        
-        // Convert the selected image to a base64 string
-        let imageBase64 = selectedImage?.jpegData(compressionQuality: 0.8)?.base64EncodedString()
-
-        let product = Product(productName: productName, productType: productType, price: priceValue, tax: taxValue, image: imageBase64)
-
-            APIservice.shared.addProduct(product: product) { result in
-                DispatchQueue.main.async {
-                    switch result {
-                    case .success(let message):
-                        alertMessage = message
-                        showAlert = true
-                        resetFields()
-                    case .failure(let error):
-                        alertMessage = "Failed to add product: \(error.localizedDescription)"
-                        showAlert = true
-                    }
-                }
-            }
-    }
-    
-    private func resetFields() {
-        productName = ""
-        productType = "Electronics"
-        price = ""
-        tax = ""
-        selectedImage = nil
-    }
-    
 }
 
+// MARK: - Image Picker
 struct ImagePicker: UIViewControllerRepresentable {
     @Binding var image: UIImage?
     @Environment(\.presentationMode) var presentationMode
@@ -257,6 +178,7 @@ struct ImagePicker: UIViewControllerRepresentable {
         }
     }
 }
+
 
 struct AddProductView_Previews: PreviewProvider {
     static var previews: some View {

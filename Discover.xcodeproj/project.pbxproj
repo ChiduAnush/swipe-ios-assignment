@@ -33,6 +33,9 @@
 		13DB1BC62D27283E00E09E48 /* ProductListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DB1BC52D27283E00E09E48 /* ProductListViewModel.swift */; };
 		13DB1BC72D27283E00E09E48 /* ProductListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DB1BC52D27283E00E09E48 /* ProductListViewModel.swift */; };
 		13DB1BC82D27283E00E09E48 /* ProductListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DB1BC52D27283E00E09E48 /* ProductListViewModel.swift */; };
+		13DB1BCA2D272CB800E09E48 /* AddProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DB1BC92D272CB800E09E48 /* AddProductViewModel.swift */; };
+		13DB1BCB2D272CB800E09E48 /* AddProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DB1BC92D272CB800E09E48 /* AddProductViewModel.swift */; };
+		13DB1BCC2D272CB800E09E48 /* AddProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DB1BC92D272CB800E09E48 /* AddProductViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +78,7 @@
 		13DB1BBD2D26E5FC00E09E48 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		13DB1BC12D26EADD00E09E48 /* PrintSystemFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintSystemFonts.swift; sourceTree = "<group>"; };
 		13DB1BC52D27283E00E09E48 /* ProductListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListViewModel.swift; sourceTree = "<group>"; };
+		13DB1BC92D272CB800E09E48 /* AddProductViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +194,7 @@
 			isa = PBXGroup;
 			children = (
 				13DB1BC52D27283E00E09E48 /* ProductListViewModel.swift */,
+				13DB1BC92D272CB800E09E48 /* AddProductViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -344,6 +349,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13DB1B772D266FFC00E09E48 /* ContentView.swift in Sources */,
+				13DB1BCA2D272CB800E09E48 /* AddProductViewModel.swift in Sources */,
 				13DB1BAE2D26C0E000E09E48 /* ProductListView.swift in Sources */,
 				13DB1BC62D27283E00E09E48 /* ProductListViewModel.swift in Sources */,
 				13DB1BB22D26C5C100E09E48 /* AddProductView.swift in Sources */,
@@ -365,6 +371,7 @@
 				13DB1BBF2D26E5FC00E09E48 /* Fonts.swift in Sources */,
 				13DB1B862D266FFE00E09E48 /* DiscoverTests.swift in Sources */,
 				13DB1BC72D27283E00E09E48 /* ProductListViewModel.swift in Sources */,
+				13DB1BCB2D272CB800E09E48 /* AddProductViewModel.swift in Sources */,
 				13DB1BC32D26EADD00E09E48 /* PrintSystemFonts.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -373,6 +380,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13DB1BCC2D272CB800E09E48 /* AddProductViewModel.swift in Sources */,
 				13DB1B922D266FFE00E09E48 /* DiscoverUITestsLaunchTests.swift in Sources */,
 				13DB1BC82D27283E00E09E48 /* ProductListViewModel.swift in Sources */,
 				13DB1BC42D26EADD00E09E48 /* PrintSystemFonts.swift in Sources */,
