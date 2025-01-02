@@ -94,10 +94,12 @@
 		13DB1B732D266FFC00E09E48 /* Discover */ = {
 			isa = PBXGroup;
 			children = (
+				13DB1BA12D2684A100E09E48 /* Models */,
+				13DB1BA02D26849A00E09E48 /* ViewModels */,
+				13DB1B9F2D26849200E09E48 /* Views */,
 				13DB1B742D266FFC00E09E48 /* DiscoverApp.swift */,
 				13DB1B762D266FFC00E09E48 /* ContentView.swift */,
-				13DB1B782D266FFE00E09E48 /* Assets.xcassets */,
-				13DB1B7A2D266FFE00E09E48 /* Preview Content */,
+				13DB1B9E2D26847400E09E48 /* Resources */,
 			);
 			path = Discover;
 			sourceTree = "<group>";
@@ -125,6 +127,36 @@
 				13DB1B912D266FFE00E09E48 /* DiscoverUITestsLaunchTests.swift */,
 			);
 			path = DiscoverUITests;
+			sourceTree = "<group>";
+		};
+		13DB1B9E2D26847400E09E48 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				13DB1B7A2D266FFE00E09E48 /* Preview Content */,
+				13DB1B782D266FFE00E09E48 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		13DB1B9F2D26849200E09E48 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		13DB1BA02D26849A00E09E48 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		13DB1BA12D2684A100E09E48 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
